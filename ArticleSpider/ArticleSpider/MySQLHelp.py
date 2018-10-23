@@ -32,7 +32,7 @@ class DBHelper:
         except:
             print('连接错误')
             return False
-        self.cur = self.conn.cursor() #创建一个游标对象
+        self.cur = self.conn.cursor()
         return True
     
     def close(self):
