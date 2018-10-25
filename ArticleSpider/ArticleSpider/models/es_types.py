@@ -63,4 +63,4 @@ class ArticleType_Lagou(DocType):
 
 
 if __name__ == "__main__":
-    ArticleType.init()
+    ArticleType_Lagou.init()

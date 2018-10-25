@@ -17,6 +17,7 @@ BOT_NAME = 'ArticleSpider'
 SPIDER_MODULES = ['ArticleSpider.spiders']
 NEWSPIDER_MODULE = 'ArticleSpider.spiders'
 
+COMMANDS_MODULE = 'cnblogs.commands' # 运行全部爬虫
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'ArticleSpider (+http://www.yourdomain.com)'

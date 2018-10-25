@@ -8,23 +8,16 @@ from ..items import LagouJobItemLoader,LagouJobItem
 from ..common import get_md5
 
 class LagouSpider(CrawlSpider):
-    '''拉勾招聘全站爬取'''
     name = 'lagou'
     allowed_domains = ['www.lagou.com']
     start_urls = ['https://www.lagou.com']
 
+    agent = "Mozilla/5.0 (X11; Ubuntu; Linux i686; rv:58.0) Gecko/20100101 Firefox/58.0"
+
     rules = (
-        Rule(LinkExtractor(allow=("zhaopin/.*",)),follow=True),
-        Rule(LinkExtractor(allow=("gongsi/j\d+.html",)),follow=True),
         Rule(LinkExtractor(allow=r'jobs/\d+.html'), callback='parse_job', follow=True), # 添加子域名
     )
-    
-#    def parse_start_url(self,response):
-#        return []
-#    
-#    def process_results(self, response, results):
-#        return results
-    
+
     def parse_job(self, response):
         #解析拉勾网的职位
         item_loader = LagouJobItemLoader(item = LagouJobItem(),response=response)

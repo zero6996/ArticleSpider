@@ -54,7 +54,7 @@ class JsonExporterPipeline(object):
         return item
     
     
-class JobboleDateToMysql(object):
+class JobboleDataToMysql(object):
     
     def process_item(self,item,spider):
         count = 0
@@ -166,3 +166,4 @@ class ElasticsearchPipeline(object):
         item.save_to_es()
 
         return item
+ 

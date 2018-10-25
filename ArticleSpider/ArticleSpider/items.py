@@ -6,8 +6,8 @@
 # https://doc.scrapy.org/en/latest/topics/items.html
 
 import re
-from datetime import datetime,timedelta
 import scrapy
+from datetime import datetime,timedelta
 from scrapy.loader import ItemLoader
 from scrapy.loader.processors import MapCompose,TakeFirst,Join
 from w3lib.html import remove_tags
@@ -19,7 +19,7 @@ es = connections.create_connection(ArticleType._doc_type.using) # es_PythonAPI�
 # job_es = connections.create_connection(ArticleType_Lagou._doc_type.using)
 
 
-
+#定义一个时间处理转换函数
 def date_convert(value):
     try:
         create_date = datetime.strptime(value,"%Y/%m/%d").date()
@@ -77,7 +77,7 @@ def gen_suggests(index,info_tuple):
 
 class ArticleItemLoader(ItemLoader):
     #自定义itemloader
-    default_output_processor = TakeFirst()
+    default_output_processor = TakeFirst() #TakeFirst()是Scrapy提供的内置处理器,返回List中的第一个非空元素
 
 
 #jobbole item
@@ -156,7 +156,12 @@ class LagouJobItemLoader(ItemLoader):
     #自定义item_loader
     default_output_processor = TakeFirst()
 
-
+'''
+MapCompose:
+输入值是被迭代处理的,list对象每一个元素被单独传入,第一个函数进行处理,然后处理的结果被连接起来形成一个新的迭代器,
+并被传入下一个函数处理,以此类推,直到最后一个函数,最后一个函数的输出被连接起来形成处理器的输出
+这个处理器提供了很方便的方式来组合多个处理单值的函数,因此常用于输入处理器
+'''
 class LagouJobItem(scrapy.Item):
     #拉勾网职位信息
     title = scrapy.Field()
@@ -186,7 +191,7 @@ class LagouJobItem(scrapy.Item):
     company_name = scrapy.Field()
     company_url = scrapy.Field()
     tags = scrapy.Field(
-            input_processor = Join(','),
+            input_processor = Join(','), # 返回用分隔符连接后的值
             )
     crawl_time = scrapy.Field()
     crawl_update_time = scrapy.Field()
